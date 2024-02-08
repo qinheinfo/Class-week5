@@ -1,4 +1,4 @@
-# Examples graphing practices
+# Examples graphing practice
 
 ## Overview
 
