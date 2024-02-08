@@ -20,6 +20,7 @@ bibliography: references.bib
 
 library(tidyverse)
 library(palmerpenguins)
+library(ggplot2)
 ```
 
 
@@ -62,12 +63,30 @@ And also planes (@fig-planes). (You can change the height and width, but don't w
 
 analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
 
-analysis_data |> 
-  ggplot(aes(x = width, y = length)) +
-  geom_point(alpha = 0.8) +
+ggplot(data = penguins,
+       aes(x = flipper_length_mm,
+           y = body_mass_g)) +
+  geom_point(aes(color = species,
+                 shape = species),
+             size = 10000,
+             alpha = 0.8) +
+  scale_color_manual(values = c("darkorange", "purple", "cyan4")) +
+  labs(
+    title = "Penguin size, Palmer Station LTER",
+    subtitle = "Flipper length and body mass for Adelie, Chinstrap and Gentoo Penguins",
+    x = "Flipper length (mm)",
+    y = "Body mass (g)",
+    color = "Penguin species",
+    shape = "Penguin species"
+  ) +
   theme_minimal() +
-  labs(x = "Wing width (mm)",
-       y = "Wing length (mm)")
+  theme(
+    legend.position = c(0.2, 0.7),
+    plot.title.position = "plot",
+    plot.caption = element_text(hjust = 0, face = "italic"),
+    plot.caption.position = "plot"
+  )
+
 ```
 
 Talk way more about it. 
